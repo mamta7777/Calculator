@@ -1,31 +1,31 @@
 let evalDone=false;
 let btns =document.querySelectorAll("button");
-let inp = document.querySelector("input");
+let para =document.querySelector("p");
 
 for (btn of btns){
     btn.addEventListener("click",(evt)=>{
         let value =evt.target.innerText;
-        let  lastCharIsOperator = inp.value.match(/[-+*/%]$/);
+        let lastCharIsOperator = para.innerText.match(/[-+*/%]$/);
         if(evalDone){
-            inp.value="";
+            para.innerText="";
             evalDone=false;
         }
         else if(value == "="){
-            inp.value =eval(inp.value);
+            para.innerText =eval(para.innerText);
             evalDone=true;
         }
         else if(value == "AC"){
-           inp.value="";
+           para.innerText="";
         }
         else if(value == "DE"){
-            inp.value=inp.value.slice(0, -1);
+            para.innerText=para.innerText.slice(0,-1);
          }
-         else if(value.match(/[-+*/%]/) && lastCharIsOperator){
-            inp.value = inp.value.slice(0, -1) + value;
+        else if(value.match(/[-+*/%]/) && lastCharIsOperator){
+            para.innerText = para.innerText.slice(0, -1) + value;
          }
         else {
             console.log(evt.target);
-            inp.value +=value;
+            para.innerText += value;
         }
     })
 }
